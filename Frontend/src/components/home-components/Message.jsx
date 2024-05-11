@@ -39,7 +39,7 @@ const MessageForm = () => {
   return (
    
     <form onSubmit={handleSubmit(onSubmit)} className="gap-2 flex flex-col p-4 rounded-lg shadow-md  bg-inherit">
-      <h1 className='text-[3vw]'>Send us a message</h1>
+      <h1 className='text-[30px] max-sm:text-[20px]'>Send us a message</h1>
       <div className="flex gap-[1vw] max-sm:flex-col">
         <input
           type="text"
@@ -76,7 +76,7 @@ const MessageForm = () => {
         {...register('message', { required: true, minLength: 10 })}
       />
       {errors.message && <span className='text-red-500'>*message should contain at least 10 characters</span>}
-      <button type="submit" disabled={isSubmitting} className="bg-blue-500 text-white px-[2vw] py-[1vw] max-sm:text-[3vw] rounded-md hover:bg-blue-600 w-1/2 mx-auto">
+      <button type="submit" disabled={isSubmitting} className="bg-blue-500 text-white px-[20px] py-[10px] max-sm:text-[15px] rounded-md hover:bg-blue-600 w-[50%] max-sm:w-[150px] mx-auto">
         Send Message
       </button>
     </form >

@@ -7,43 +7,49 @@ import Login from './pages/LoginPage/Login.jsx'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Context } from "./main.jsx"
+import SignUpPage from "./pages/SignupPage/Signup.jsx"
+import axios from "axios"
 
 function App() {
 
-  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context)
-
-  // const Navigate = useNavigate()
+  const { setIsAuthenticated, setUser } = useContext(Context)
 
   useEffect(() => {
 
     const fetchUser = async () => {
+
       try {
+
         let res = await axios.get('http://localhost:3000/api/v1/users/patient/me', {
           withCredentials: true,
-        })
-        // console.log('response got ',res);
-        setUser(res.data.user)
-        console.log('inside app and value of authentication is ', isAuthenticated);
-        // setIsAuthenticated(true)
-        // Navigate('/')
+        });
+
+        if (Object.keys(res.data.user).length > 0) {
+          setUser(res.data.user)
+          setIsAuthenticated(true)
+          toast.success(res.data.message)
+        }
+
       } catch (error) {
         setUser({})
-        // setIsAuthenticated(false)
+        setIsAuthenticated(false)
+        // toast.error(error.response.data.message)
       }
-    }
+    };
 
-    fetchUser()
-  }
-    , [isAuthenticated])
+    fetchUser();
+  }, []);
+
 
   return (
-    <div className='font-["Neue_Montreal"] bg-zinc-800 '>
+    <div className='font-["Neue_Montreal"] bg-zinc-800 text-white'>
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
         <ToastContainer position="top-center" />
       </Router>

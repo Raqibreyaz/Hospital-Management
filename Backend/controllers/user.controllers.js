@@ -132,7 +132,7 @@ const getAllDoctors = catchAsyncError(async (req, res, next) => {
 const getUserDetails = catchAsyncError(async (req, res, next) => {
     return res.status(200).json({
         success: true,
-        patient: req.user
+        user: req.user
     })
 
 }
