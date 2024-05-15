@@ -16,7 +16,7 @@ config({ path: "./config/config.env" })
 
 // handle cors error
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL],
+  origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL,],
   methods: ["get", "post", "put", "delete"],
   credentials: true,
 }))

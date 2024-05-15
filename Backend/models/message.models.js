@@ -27,6 +27,10 @@ const messageSchema = mongoose.Schema({
         type: String,
         required: true,
         minLength: [10, "Message must contain at least 10 characters"]
+    },
+    sentAt: {
+        type: Date,
+        default: Date.now()
     }
 })
 

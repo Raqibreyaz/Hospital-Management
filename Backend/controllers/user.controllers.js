@@ -47,19 +47,14 @@ const addNewUser = catchAsyncError(async (req, res, next) => {
 
         const { doctorAvatar } = req.files
 
-        console.log(doctorAvatar);
-
         // avatar should be in these formats
         const allowedFormats = ['image/png', 'image/jpg', 'image/jpeg', 'image/webp']
         if (!allowedFormats.includes(doctorAvatar.mimetype))
             return next(new Apierror("file format not supported", 400))
 
-        console.log('going to upload on cloudinary');
-
         // now do upload media on cloud
         const cloudinaryResponse = await cloudinary.uploader.upload(doctorAvatar.tempFilePath)
 
-        console.log('cloudinary response ', cloudinaryResponse);
 
         if (!cloudinaryResponse || cloudinaryResponse.error) {
             console.error('cloudinary error :', cloudinaryResponse.error || 'something went wrong with cloudinary')
